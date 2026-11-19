@@ -1,0 +1,72 @@
+---
+import { getEmDashCollection } from "emdash";
+import Base from "../layouts/Base.astro";
+import Empty from "../components/Empty.astro";
+import Spot from "../components/Spot.astro";
+
+const { entries, cacheHint } = await getEmDashCollection("uses", { limit: 100 });
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+
+const order = ["Dev", "Mac", "Cloudflare", "Hardware", "Other"];
+const groups = order
+	.map((name) => ({ name: name.toLowerCase(), items: entries.filter((e) => e.data.category === name) }))
+	.filter((g) => g.items.length > 0);
+---
+
+<Base title="Uses" description="The things I use to build things.">
+	{groups.length === 0 ? <Empty title="Nothing listed yet" text="Still deciding what counts as a setup." /> : (
+		<div class="index">
+			<div class="index__intro">
+				<Spot name="desk" width={190} />
+				<p class="index__note">my desk, more or less. the stickers peel off</p>
+			</div>
+			{groups.map((g) => (
+				<section class="index__group">
+					<h2 class="index__label mono">{g.name}</h2>
+					<ul>
+						{g.items.map((e) => {
+							const inner = (
+								<>
+									<span class="row__head">
+										<span class="row__title">{e.data.title}</span>
+									</span>
+									{e.data.description && <span class="row__desc">{e.data.description}</span>}
+								</>
+							);
+							const sticker = (e.data as { sticker?: { src?: string } }).sticker;
+							const src = sticker?.src;
+							// A stable tilt per sticker, -6deg..+6deg
+							let h = 7;
+							for (const c of e.id) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+							const tilt = (((h >> 3) % 9) - 4) * 1.5;
+							return (
+								<li class:list={[src && "use"]}>
+									{src && (
+										<span class="sticker-slot" style={`--img:url("${src}")`} aria-hidden="true">
+											<span class="sticker" data-sticker style={`--tilt:${tilt}deg`}>
+												<span class="sticker__base">
+													<img src={src} alt="" draggable="false" loading="lazy" decoding="async" />
+													<i class="sticker__shade"></i>
+												</span>
+												<span class="sticker__flap"><i class="sticker__back"></i></span>
+											</span>
+										</span>
+									)}
+									{e.data.url ? (
+										<a class="row" href={e.data.url} target="_blank" rel="noopener noreferrer">{inner}</a>
+									) : (
+										<div class="row">{inner}</div>
+									)}
+								</li>
+							);
+						})}
+					</ul>
+				</section>
+			))}
+		</div>
+	)}
+</Base>
+
+<script>
+	import "../scripts/stickers.js";
+</script>

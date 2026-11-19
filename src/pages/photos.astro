@@ -1,0 +1,31 @@
+---
+import { Image } from "emdash/ui";
+import Base from "../layouts/Base.astro";
+import Empty from "../components/Empty.astro";
+import { loadFeed } from "../lib/feed";
+import { tapeFor } from "../lib/tape";
+
+const { items, hints } = await loadFeed(["photos"], { limit: 100 });
+if (Astro.cache?.enabled) for (const h of hints) Astro.cache.set(h as never);
+---
+
+<Base title="Photos" description="Random pictures from my camera roll.">
+	{items.length === 0 ? <Empty title="No photos yet" text="The camera roll is still loading." /> : (
+		<ul class="prints">
+			{items.map(({ entry }) => {
+				const { layout, tilt } = tapeFor(entry.id);
+				return (
+				<li>
+					<figure class="print" data-tape={layout} style={`--tilt:${tilt}deg`}>
+						<span class="tape"></span>
+						<Image image={entry.data.image} sizes="300px" />
+						{(entry.data.caption || entry.data.title) && (
+							<figcaption class="print__caption">{entry.data.caption ?? entry.data.title}</figcaption>
+						)}
+					</figure>
+				</li>
+				);
+			})}
+		</ul>
+	)}
+</Base>

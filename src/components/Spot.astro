@@ -1,0 +1,33 @@
+---
+/** A pen-and-watercolour spot sketch, drawn straight onto the page (transparent WebP). */
+const dims = {
+	bridge: [520, 233],
+	chair: [340, 428],
+	cloud: [560, 229],
+	desk: [440, 346],
+	plane: [520, 264],
+} as const;
+
+type Name = keyof typeof dims;
+interface Props {
+	name: Name;
+	/** Rendered width in CSS px */
+	width: number;
+	class?: string;
+	alt?: string;
+}
+const { name, width, class: className, alt = "" } = Astro.props;
+const [w, h] = dims[name];
+---
+
+<img
+	src={`/art/${name}.webp`}
+	width={width}
+	height={Math.round((width * h) / w)}
+	alt={alt}
+	class:list={["spot", `spot--${name}`, className]}
+	loading="lazy"
+	decoding="async"
+	aria-hidden={alt ? undefined : "true"}
+	draggable="false"
+/>

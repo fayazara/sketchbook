@@ -1,0 +1,37 @@
+---
+/**
+ * The one drawing technique used across the site: take a plain CSS border
+ * or shape and make it look pencilled.
+ *  - #pencil: boxes, circles, outlines (wobble + graphite grain).
+ *  - #pencil-line: thin horizontal rules.
+ *  - #boil: the same wobble, but re-rolled a few times a second like
+ *    hand-drawn animation. Used on exactly one thing: the "hi" arrow.
+ */
+---
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+	<defs>
+		<filter id="pencil" x="-4%" y="-12%" width="108%" height="124%" color-interpolation-filters="sRGB">
+			<feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="4" result="warp" />
+			<feDisplacementMap in="SourceGraphic" in2="warp" scale="3.2" xChannelSelector="R" yChannelSelector="G" result="wobble" />
+			<feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="11" result="grain" />
+			<feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.3 0 0 0 1.95" result="graphite" />
+			<feComposite in="wobble" in2="graphite" operator="in" />
+		</filter>
+
+		<filter id="pencil-line" x="-2%" y="-600%" width="104%" height="1300%" color-interpolation-filters="sRGB">
+			<feTurbulence type="fractalNoise" baseFrequency="0.018 0.06" numOctaves="2" seed="7" result="warp" />
+			<feDisplacementMap in="SourceGraphic" in2="warp" scale="4" xChannelSelector="R" yChannelSelector="G" result="wobble" />
+			<feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="1" seed="19" result="grain" />
+			<feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.3 0 0 0 1.95" result="graphite" />
+			<feComposite in="wobble" in2="graphite" operator="in" />
+		</filter>
+
+		<filter id="boil" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+			<feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="1" result="warp">
+				<animate attributeName="seed" values="1;2;3;4;5" dur="0.7s" calcMode="discrete" repeatCount="indefinite" />
+			</feTurbulence>
+			<feDisplacementMap in="SourceGraphic" in2="warp" scale="2.4" xChannelSelector="R" yChannelSelector="G" />
+		</filter>
+	</defs>
+</svg>

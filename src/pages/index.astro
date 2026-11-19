@@ -1,0 +1,31 @@
+---
+import Base from "../layouts/Base.astro";
+import FeedItem from "../components/FeedItem.astro";
+import Empty from "../components/Empty.astro";
+import Spot from "../components/Spot.astro";
+import FlyingBird from "../components/FlyingBird.astro";
+import { loadFeed } from "../lib/feed";
+
+const { items, hints } = await loadFeed(
+	["projects", "posts", "talks", "videos", "photos"],
+	{ limit: 30, onlyFeaturedProjects: true },
+);
+if (Astro.cache?.enabled) for (const h of hints) Astro.cache.set(h as never);
+---
+
+<Base
+	title="Fayaz Ahmed"
+	description="Sr. Developer Educator at Cloudflare. I build a lot of things, then show what's possible."
+>
+	{items.length === 0 ? <Empty /> : (
+		<div class="feed">
+			{items.map((item, i) => (
+				<>
+					<FeedItem item={item} index={i} />
+					{i === 2 && <FlyingBird />}
+					{i === 5 && <Spot name="cloud" width={270} class="spot--between" />}
+				</>
+			))}
+		</div>
+	)}
+</Base>

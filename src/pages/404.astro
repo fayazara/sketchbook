@@ -1,0 +1,13 @@
+---
+import Base from "../layouts/Base.astro";
+import Spot from "../components/Spot.astro";
+---
+
+<Base title="Not found" robots="noindex" active={null}>
+	<div class="empty">
+		<Spot name="plane" width={230} class="empty__spot" />
+		<h1 class="empty__title">That page flew off.</h1>
+		<p class="empty__text">404. Whatever you were looking for moved, or never existed.</p>
+		<p><a class="hand-link" href="/">Back to the feed</a></p>
+	</div>
+</Base>

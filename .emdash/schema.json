@@ -1,0 +1,425 @@
+{
+  "collections": [
+    {
+      "slug": "pages",
+      "label": "Pages",
+      "labelSingular": "Page",
+      "supports": [
+        "drafts",
+        "revisions",
+        "preview",
+        "search",
+        "seo"
+      ],
+      "hidden": false,
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "content",
+          "label": "Content",
+          "type": "portableText",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "photos",
+      "label": "Photos",
+      "labelSingular": "Photo",
+      "supports": [
+        "drafts"
+      ],
+      "hidden": false,
+      "fields": [
+        {
+          "slug": "image",
+          "label": "Photo",
+          "type": "image",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "caption",
+          "label": "Caption",
+          "type": "text",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "location",
+          "label": "Location",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "taken_at",
+          "label": "Taken on",
+          "type": "datetime",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "note",
+          "label": "Margin note (handwritten aside)",
+          "type": "string",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "posts",
+      "label": "Articles",
+      "labelSingular": "Article",
+      "supports": [
+        "drafts",
+        "revisions",
+        "preview",
+        "search",
+        "seo"
+      ],
+      "hidden": false,
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "featured_image",
+          "label": "Featured image",
+          "type": "image",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "content",
+          "label": "Content",
+          "type": "portableText",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "excerpt",
+          "label": "Excerpt",
+          "type": "text",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "pinned",
+          "label": "Pin to top of feed",
+          "type": "boolean",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "note",
+          "label": "Margin note (handwritten aside)",
+          "type": "string",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "projects",
+      "label": "Projects",
+      "labelSingular": "Project",
+      "supports": [
+        "drafts",
+        "search"
+      ],
+      "hidden": false,
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "description",
+          "label": "Description",
+          "type": "text",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "category",
+          "label": "Category",
+          "type": "select",
+          "required": true,
+          "unique": false,
+          "validation": {
+            "options": [
+              "app",
+              "oss",
+              "experiment",
+              "earlier"
+            ]
+          }
+        },
+        {
+          "slug": "badge",
+          "label": "Badge (Live, WIP, New…)",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "url",
+          "label": "Live URL",
+          "type": "url",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "repo",
+          "label": "Repo / store URL",
+          "type": "url",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "stars",
+          "label": "GitHub stars",
+          "type": "integer",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "shipped",
+          "label": "Shipped (shown on card, e.g. Nov 2026)",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "featured_image",
+          "label": "Screenshot",
+          "type": "image",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "featured",
+          "label": "Show in the main feed",
+          "type": "boolean",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "pinned",
+          "label": "Pin to top of feed",
+          "type": "boolean",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "sort_date",
+          "label": "Feed ordering date",
+          "type": "datetime",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "note",
+          "label": "Margin note (handwritten aside)",
+          "type": "string",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "talks",
+      "label": "Talks",
+      "labelSingular": "Talk",
+      "supports": [
+        "drafts",
+        "search"
+      ],
+      "hidden": false,
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "event",
+          "label": "Event",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "location",
+          "label": "Location",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "date",
+          "label": "Date",
+          "type": "datetime",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "description",
+          "label": "Description",
+          "type": "text",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "featured_image",
+          "label": "Cover image",
+          "type": "image",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "video_url",
+          "label": "Recording URL",
+          "type": "url",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "slides_url",
+          "label": "Slides URL",
+          "type": "url",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "note",
+          "label": "Margin note (handwritten aside)",
+          "type": "string",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "uses",
+      "label": "Uses",
+      "labelSingular": "Thing I use",
+      "supports": [
+        "drafts"
+      ],
+      "hidden": false,
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Name",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "category",
+          "label": "Category",
+          "type": "select",
+          "required": true,
+          "unique": false,
+          "validation": {
+            "options": [
+              "Dev",
+              "Mac",
+              "Cloudflare",
+              "Hardware",
+              "Other"
+            ]
+          }
+        },
+        {
+          "slug": "description",
+          "label": "Why",
+          "type": "text",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "url",
+          "label": "Link",
+          "type": "url",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "videos",
+      "label": "Videos",
+      "labelSingular": "Video",
+      "supports": [
+        "drafts",
+        "search"
+      ],
+      "hidden": false,
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "youtube_url",
+          "label": "YouTube URL",
+          "type": "url",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "description",
+          "label": "Description",
+          "type": "text",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "date",
+          "label": "Date",
+          "type": "datetime",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "note",
+          "label": "Margin note (handwritten aside)",
+          "type": "string",
+          "required": false,
+          "unique": false
+        }
+      ]
+    }
+  ],
+  "version": "2e0d4e26f1e93205"
+}

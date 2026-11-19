@@ -1,0 +1,15 @@
+---
+import Spot from "./Spot.astro";
+
+interface Props {
+	title?: string;
+	text?: string;
+}
+const { title = "Nothing here yet", text = "I'm probably off building something. Check back soon." } = Astro.props;
+---
+
+<div class="empty">
+	<Spot name="chair" width={130} class="empty__spot" />
+	<h2 class="empty__title">{title}</h2>
+	<p class="empty__text">{text}</p>
+</div>

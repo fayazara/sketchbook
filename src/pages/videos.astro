@@ -1,0 +1,17 @@
+---
+import Base from "../layouts/Base.astro";
+import FeedItem from "../components/FeedItem.astro";
+import Empty from "../components/Empty.astro";
+import { loadFeed } from "../lib/feed";
+
+const { items, hints } = await loadFeed(["videos"], { limit: 100 });
+if (Astro.cache?.enabled) for (const h of hints) Astro.cache.set(h as never);
+---
+
+<Base title="Videos" description="Videos about building on Cloudflare.">
+	{items.length === 0 ? <Empty title="No videos yet" text="The camera is warming up." /> : (
+		<div class="feed">
+			{items.map((item, i) => <FeedItem item={item} index={i} />)}
+		</div>
+	)}
+</Base>

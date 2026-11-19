@@ -1,0 +1,63 @@
+---
+export const prerender = false;
+
+import { search, SearchUnavailableError, type SearchResponse } from "emdash";
+import Base from "../layouts/Base.astro";
+
+const query = Astro.url.searchParams.get("q")?.trim() || "";
+const collections = ["posts", "projects", "talks", "videos", "uses"];
+
+let searchResponse: SearchResponse = { items: [] };
+let unavailable = false;
+if (query) {
+	try {
+		searchResponse = await search(query, { collections, limit: 30 });
+	} catch (error) {
+		if (!(error instanceof SearchUnavailableError)) throw error;
+		unavailable = true;
+	}
+}
+const results = searchResponse.items;
+
+const pathFor = (r: { collection?: string; slug?: string | null; id: string }) => {
+	const slug = r.slug ?? r.id;
+	if (r.collection === "posts") return `/posts/${slug}`;
+	if (r.collection === "projects") return "/projects";
+	return `/${r.collection}`;
+};
+const labels: Record<string, string> = {
+	posts: "Article", projects: "Project", talks: "Talk", videos: "Video", uses: "Uses",
+};
+---
+
+<Base title={query ? `Search: ${query}` : "Search"} description="Search everything" active={null}>
+	<form class="search" action="/search" method="get" role="search">
+		<input type="search" name="q" value={query} placeholder="search the notebook…" aria-label="Search" autofocus={!query} />
+	</form>
+
+	{unavailable && <p class="empty__text">Search isn't available right now.</p>}
+	{query && !unavailable && results.length === 0 && (
+		<div class="empty">
+			<h2 class="empty__title">Nothing for "{query}"</h2>
+			<p class="empty__text">Try fewer words.</p>
+		</div>
+	)}
+	{results.length > 0 && (
+		<div class="index">
+			<ul>
+				{results.map((r) => (
+					<li>
+						<a class="row" href={pathFor(r as never)}>
+							<span class="row__head">
+								<span class="row__title">{r.title ?? "Untitled"}</span>
+								<span class="row__leader" aria-hidden="true"></span>
+								<span class="row__meta mono">{(labels[(r as { collection?: string }).collection ?? ""] ?? "").toLowerCase()}</span>
+							</span>
+							{r.snippet && <span class="row__desc" set:html={r.snippet} />}
+						</a>
+					</li>
+				))}
+			</ul>
+		</div>
+	)}
+</Base>

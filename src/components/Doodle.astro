@@ -1,0 +1,25 @@
+---
+/** A single hand-drawn pen mark: the curly arrow that points at the photo. */
+interface Props {
+	size?: number;
+	class?: string;
+}
+const { size = 44, class: className } = Astro.props;
+---
+
+<svg
+	viewBox="0 0 40 28"
+	width={size}
+	height={Math.round((size * 28) / 40)}
+	fill="none"
+	stroke="currentColor"
+	stroke-width="1.6"
+	stroke-linecap="round"
+	stroke-linejoin="round"
+	class:list={["doodle", className]}
+	aria-hidden="true"
+	focusable="false"
+>
+	<path d="M37 4C28 3 14 7 6 21" />
+	<path d="M13 21.5L5.5 22.5L4 13.5" />
+</svg>

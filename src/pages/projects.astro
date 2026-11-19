@@ -1,0 +1,48 @@
+---
+import Base from "../layouts/Base.astro";
+import Empty from "../components/Empty.astro";
+import { loadFeed, compactNumber } from "../lib/feed";
+
+const groups = [
+	{ key: "app", label: "apps" },
+	{ key: "oss", label: "open source" },
+	{ key: "experiment", label: "experiments" },
+	{ key: "earlier", label: "earlier" },
+] as const;
+
+const { items, hints } = await loadFeed(["projects"], { limit: 200 });
+if (Astro.cache?.enabled) for (const h of hints) Astro.cache.set(h as never);
+
+const sections = groups
+	.map((g) => ({ ...g, items: items.filter((i) => i.entry.data.category === g.key) }))
+	.filter((g) => g.items.length > 0);
+---
+
+<Base title="Projects" description="Everything I've built recently: apps, open source, and experiments.">
+	{sections.length === 0 ? <Empty /> : (
+		<div class="index">
+			{sections.map((g) => (
+				<section class="index__group">
+					<h2 class="index__label mono">{g.label}</h2>
+					<ul>
+						{g.items.map(({ entry }) => {
+							const d = entry.data;
+							return (
+								<li>
+									<a class="row" href={d.url ?? d.repo} target="_blank" rel="noopener noreferrer">
+										<span class="row__head">
+											<span class="row__title">{d.title}</span>
+											<span class="row__leader" aria-hidden="true"></span>
+											{d.stars ? <span class="row__meta mono">{compactNumber(d.stars)} stars</span> : null}
+										</span>
+										<span class="row__desc">{d.description}</span>
+									</a>
+								</li>
+							);
+						})}
+					</ul>
+				</section>
+			))}
+		</div>
+	)}
+</Base>

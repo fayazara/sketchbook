@@ -1,0 +1,63 @@
+/*
+  theme.css -- one palette for the whole notebook.
+
+  Everything is drawn on a single sheet of paper laid on a flat desk.
+  The colours are the ones the drawings themselves use: warm black ink,
+  sage, dusty blue, clay. Clay is the only accent and it is only ever
+  used for hand-drawn marks (underlines, selection).
+*/
+
+:root {
+	color-scheme: light;
+
+	--desk: #86a6c6; /* the flat colour the sheet lies on */
+	--paper: #f7f2e8;
+	--paper-deep: #efe8d8; /* a second sheet laid over the first */
+	--ink: #1f1c18;
+	--ink-2: #5a544b; /* body copy */
+	--ink-3: #8c8477; /* labels, meta */
+	--pencil: rgb(31 28 24 / 0.8);
+
+	--sage: #9db08a;
+	--sky: #8fb0cf;
+	--clay: #d1704a;
+	--tape: rgb(228 208 150 / 0.62);
+
+	/* Map the template tokens (prose.css etc.) onto the notebook palette */
+	--color-bg: var(--paper);
+	--color-surface: #fffdf8;
+	--color-fill: var(--paper-deep);
+	--color-fill-strong: #e6dcc6;
+	--color-text: var(--ink);
+	--color-text-secondary: var(--ink-2);
+	--color-muted: var(--ink-3);
+	--color-border: rgb(31 28 24 / 0.14);
+	--color-border-subtle: rgb(31 28 24 / 0.08);
+	--color-border-strong: rgb(31 28 24 / 0.28);
+	--color-ring: rgb(31 28 24 / 0.1);
+	--color-shadow: rgb(60 40 10 / 0.14);
+	--color-media-outline: oklch(0 0 0 / 0.1);
+	--color-brand: var(--ink);
+	--color-brand-hover: #3a352f;
+	--color-on-brand: var(--paper);
+	--color-accent: var(--clay);
+
+	--radius-lg: 12px;
+	--radius-xl: 20px;
+	--content-width: 560px;
+	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Time of day (set on <html data-time> by a script in Base.astro) */
+:root[data-time="dawn"] {
+	--desk: #b9a9c8;
+}
+:root[data-time="day"] {
+	--desk: #86a6c6;
+}
+:root[data-time="dusk"] {
+	--desk: #d4a085;
+}
+:root[data-time="night"] {
+	--desk: #3f5472;
+}

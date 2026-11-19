@@ -1,0 +1,130 @@
+---
+import { Image } from "emdash/ui";
+import Icon from "./Icon.astro";
+import Doodle from "./Doodle.astro";
+import { PlayIcon } from "@hugeicons/core-free-icons";
+import { compactNumber, hostOf, youtubeId, type FeedEntry } from "../lib/feed";
+import { tapeFor } from "../lib/tape";
+import { formatReadingTime, getReadingTime } from "../utils/reading-time";
+
+interface Props {
+	item: FeedEntry;
+	index?: number;
+}
+
+const { item } = Astro.props;
+const { kind, entry, date, pinned } = item;
+const d = entry.data as Record<string, any>;
+
+const kinds: Record<string, string> = {
+	projects: "project",
+	posts: "article",
+	talks: "talk",
+	videos: "video",
+	photos: "photo",
+};
+
+// MM/YYYY in the typewriter face. Projects show their own "shipped" label instead.
+const when =
+	kind === "projects"
+		? (d.shipped as string | undefined)
+		: `${String(date.getMonth() + 1).padStart(2, "0")}/${date.getFullYear()}`;
+
+const label: string[] = [kinds[kind]];
+if (kind === "posts") label.push(formatReadingTime(getReadingTime(d.content)));
+if (kind === "talks") label.push([d.event, d.location].filter(Boolean).join(", "));
+if (kind === "photos" && d.location) label.push(d.location);
+
+const title = d.title ?? (kind === "photos" ? "Photo" : "Untitled");
+const { layout: tape, tilt } = tapeFor(entry.id);
+const ytId = kind === "videos" ? youtubeId(d.youtube_url) : null;
+---
+
+<article class:list={["entry", `entry--${kind}`]}>
+	<p class="entry__label mono">
+		<span>{pinned ? "pinned, " : ""}{label.join(" · ")}</span>
+		{when && <time datetime={date.toISOString()}>{when}</time>}
+	</p>
+
+	<h2 class="entry__title">
+		{kind === "posts" ? <a href={`/posts/${entry.id}`}>{title}</a> : title}
+	</h2>
+
+	{d.note && (
+		<p class="entry__note"><Doodle class="entry__note-arrow" size={30} /><span>{d.note}</span></p>
+	)}
+
+	{kind === "projects" && (
+		<>
+			<p class="entry__text">{d.description}</p>
+			{d.featured_image && (
+				<a class="print" data-tape={tape} style={`--tilt:${tilt}deg`} href={d.url ?? d.repo} target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+					<span class="tape"></span><span class="tape"></span>
+					<Image image={d.featured_image} sizes="520px" />
+				</a>
+			)}
+			<p class="entry__links">
+				{d.url && <a class="hand-link" href={d.url} target="_blank" rel="noopener noreferrer">{hostOf(d.url)}</a>}
+				{d.repo && (
+					<a class="hand-link" href={d.repo} target="_blank" rel="noopener noreferrer">
+						{d.repo.includes("github.com") ? "github" : "get it"}{d.stars ? ` · ${compactNumber(d.stars)} stars` : ""}
+					</a>
+				)}
+			</p>
+		</>
+	)}
+
+	{kind === "posts" && (
+		<>
+			{d.excerpt && <p class="entry__text">{d.excerpt}</p>}
+			{d.featured_image && (
+				<a class="print" data-tape={tape} style={`--tilt:${tilt}deg`} href={`/posts/${entry.id}`} tabindex="-1" aria-hidden="true">
+					<span class="tape"></span><span class="tape"></span>
+					<Image image={d.featured_image} sizes="520px" />
+				</a>
+			)}
+			<p class="entry__links"><a class="hand-link" href={`/posts/${entry.id}`}>read it</a></p>
+		</>
+	)}
+
+	{kind === "talks" && (
+		<>
+			{d.description && <p class="entry__text">{d.description}</p>}
+			{d.featured_image && (
+				<div class="print" data-tape={tape} style={`--tilt:${tilt}deg`}>
+					<span class="tape"></span><span class="tape"></span>
+					<Image image={d.featured_image} sizes="520px" />
+				</div>
+			)}
+			<p class="entry__links">
+				{d.video_url && <a class="hand-link" href={d.video_url} target="_blank" rel="noopener noreferrer">watch</a>}
+				{d.slides_url && <a class="hand-link" href={d.slides_url} target="_blank" rel="noopener noreferrer">slides</a>}
+			</p>
+		</>
+	)}
+
+	{kind === "videos" && (
+		<>
+			{d.description && <p class="entry__text">{d.description}</p>}
+			{ytId ? (
+				<button type="button" class="print print--video" data-tape={tape} style={`--tilt:${tilt}deg`} data-yt={ytId} data-title={d.title} aria-label={`Play ${d.title}`}>
+					<span class="tape"></span><span class="tape"></span>
+					<img src={`https://i.ytimg.com/vi/${ytId}/hqdefault.jpg`} alt="" loading="lazy" />
+					<span class="play"><Icon icon={PlayIcon} size={20} /></span>
+				</button>
+			) : (
+				<p class="entry__links"><a class="hand-link" href={d.youtube_url} target="_blank" rel="noopener noreferrer">watch</a></p>
+			)}
+		</>
+	)}
+
+	{kind === "photos" && (
+		<>
+			<figure class="print" data-tape={tape} style={`--tilt:${tilt}deg`}>
+				<span class="tape"></span><span class="tape"></span>
+				<Image image={d.image} sizes="520px" />
+				{d.caption && <figcaption class="print__caption">{d.caption}</figcaption>}
+			</figure>
+		</>
+	)}
+</article>

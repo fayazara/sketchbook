@@ -1,0 +1,326 @@
+---
+import { getSiteSettingsWithCacheHint } from "emdash";
+import { EmDashHead, EmDashBodyStart, EmDashBodyEnd } from "emdash/ui";
+import { createPublicPageContext } from "emdash/page";
+import { Font } from "astro:assets";
+import Profile from "../components/Profile.astro";
+import PencilDefs from "../components/PencilDefs.astro";
+import Spot from "../components/Spot.astro";
+import SkyBody from "../components/SkyBody.astro";
+import Walker from "../components/Walker.astro";
+import { getSiteLocale } from "../utils/locale";
+import { resolveBlogSiteIdentity } from "../utils/site-identity";
+import { site, tabs, type TabKey } from "../site";
+import "../styles/tokens.css";
+import "../styles/theme.css";
+import "../styles/transitions.css";
+import "../styles/notebook.css";
+
+interface Props {
+	title: string;
+	pageTitle?: string | null;
+	description?: string | null;
+	image?: string | null;
+	canonical?: string | null;
+	robots?: string | null;
+	type?: "website" | "article";
+	publishedTime?: string | null;
+	modifiedTime?: string | null;
+	author?: string | null;
+	/** Pass content reference for plugin page contributions on content pages */
+	content?: { collection: string; id: string; slug?: string | null };
+	/** Which tab is highlighted. Inferred from the URL when omitted. */
+	active?: TabKey | null;
+	/** Accepted for backwards compatibility; the left column is always shown. */
+	compact?: boolean;
+}
+
+const {
+	title,
+	pageTitle,
+	description,
+	image,
+	canonical,
+	robots,
+	type = "website",
+	publishedTime,
+	modifiedTime,
+	author,
+	content,
+} = Astro.props;
+
+const settingsResult = await getSiteSettingsWithCacheHint();
+if (Astro.cache?.enabled) Astro.cache.set(settingsResult.cacheHint);
+
+const { siteTitle } = resolveBlogSiteIdentity(settingsResult.data);
+const titleIncludesSiteName =
+	title === siteTitle ||
+	title.endsWith(` | ${siteTitle}`) ||
+	title.endsWith(` — ${siteTitle}`);
+const fullTitle = titleIncludesSiteName ? title : `${title} — ${siteTitle}`;
+
+const pageCtx = createPublicPageContext({
+	Astro,
+	kind: content ? "content" : "custom",
+	pageType: type,
+	title: fullTitle,
+	pageTitle: pageTitle ?? title,
+	description,
+	canonical,
+	image,
+	content,
+	seo: { ogImage: image, robots },
+	articleMeta: { publishedTime, modifiedTime, author },
+	siteName: siteTitle,
+});
+
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const inferred: TabKey | null =
+	path === "/"
+		? "all"
+		: (tabs.find((t) => t.href !== "/" && (path === t.href || path.startsWith(`${t.href}/`)))
+				?.key ?? null);
+const active = Astro.props.active === undefined ? inferred : Astro.props.active;
+
+const lang = getSiteLocale() ?? "en";
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<Font cssVariable="--font-sans" preload />
+		<Font cssVariable="--font-mono" />
+		<Font cssVariable="--font-hand" />
+		<title>{fullTitle}</title>
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<EmDashHead page={pageCtx} />
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title={`${siteTitle} RSS Feed`}
+			href="/rss.xml"
+		/>
+		<script is:inline>
+			// Flag JS early so the intro can start hidden, and skip it on repeat views.
+			(function () {
+				document.documentElement.classList.add("js");
+				// Time of day: dawn, day, dusk, night. A click on the sun/moon (this tab session only) or ?time= overrides it.
+				var q = (location.search.match(/[?&]time=(dawn|day|dusk|night)/) || [])[1];
+				var saved = null;
+				try { saved = sessionStorage.getItem("time"); } catch (e) {}
+				var h = new Date().getHours();
+				document.documentElement.setAttribute(
+					"data-time",
+					q || saved || (h >= 5 && h < 8 ? "dawn" : h >= 8 && h < 17 ? "day" : h >= 17 && h < 20 ? "dusk" : "night")
+				);
+				try {
+					if (sessionStorage.getItem("intro") === "1") {
+						document.documentElement.classList.add("intro-seen");
+					}
+				} catch (e) {}
+				if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+					document.documentElement.classList.add("calm");
+				}
+			})();
+		</script>
+	</head>
+	<body>
+		<EmDashBodyStart page={pageCtx} />
+		<PencilDefs />
+		<a href="#main" class="skip-link">Skip to content</a>
+
+		<div class="desk">
+			<SkyBody />
+			<div class="paper-shadow">
+			<div class="paper">
+				<span class="paper__fold" aria-hidden="true"></span>
+
+				<div class="layout">
+					<aside class="me-col">
+						<Profile />
+					</aside>
+
+					<div class="stream">
+						<nav class="tabs" aria-label="Sections">
+							<div class="tabs__scroller">
+								<div class="t-tabs">
+									<span class="t-tabs-pill" aria-hidden="true"></span>
+									{
+										tabs.map((tab) => (
+											<a
+												href={tab.href}
+												class="t-tab"
+												aria-current={active === tab.key ? "page" : undefined}
+											>
+												{tab.label}
+											</a>
+										))
+									}
+								</div>
+							</div>
+						</nav>
+
+						<main id="main" tabindex="-1">
+							<slot />
+						</main>
+					</div>
+				</div>
+
+				<footer class="foot">
+					<div class="foot__row">
+						<p class="foot__line">That's the bottom of the page.<br />Go build something.</p>
+						<Walker />
+						<Spot name="desk" width={230} class="foot__desk" />
+					</div>
+					<div class="foot__ground" aria-hidden="true"></div>
+					<p class="foot__fine mono">
+						<span>© {new Date().getFullYear()} {site.name}. Running on Cloudflare.</span>
+						<span><a class="hand-link" href="/rss.xml">rss</a> · built with <a class="hand-link" href="https://emdashcms.com">EmDash</a></span>
+					</p>
+				</footer>
+			</div>
+			</div>
+		</div>
+
+		<script is:inline>
+			(function () {
+				var root = document.documentElement;
+				var reduce = root.classList.contains("calm");
+
+				/* ---- Tabs sliding: the pill tweens from the previous page's tab ---- */
+				var bar = document.querySelector(".t-tabs");
+				if (bar) {
+					var pill = bar.querySelector(".t-tabs-pill");
+					var tabs = [].slice.call(bar.querySelectorAll(".t-tab"));
+					var scroller = bar.parentElement;
+					var active = bar.querySelector('.t-tab[aria-current="page"]');
+					var moveTo = function (tab, animate) {
+						var prev = pill.style.transition;
+						if (!animate) pill.style.transition = "none";
+						if (tab) {
+							pill.style.opacity = "1";
+							pill.style.transform = "translateX(" + tab.offsetLeft + "px)";
+							pill.style.width = tab.offsetWidth + "px";
+						} else {
+							pill.style.opacity = "0";
+						}
+						if (!animate) {
+							void pill.offsetWidth;
+							pill.style.transition = prev;
+						}
+					};
+					var from = null;
+					try {
+						var i = parseInt(sessionStorage.getItem("tab-idx"), 10);
+						if (i >= 0 && tabs[i]) from = tabs[i];
+					} catch (e) {}
+					moveTo(from || active, false);
+					if (active && scroller.scrollWidth > scroller.clientWidth) {
+						scroller.scrollLeft = active.offsetLeft - (scroller.clientWidth - active.offsetWidth) / 2;
+					}
+					requestAnimationFrame(function () {
+						requestAnimationFrame(function () {
+							moveTo(active, !reduce);
+						});
+					});
+					try {
+						sessionStorage.setItem("tab-idx", String(tabs.indexOf(active)));
+					} catch (e) {}
+					window.addEventListener("resize", function () {
+						moveTo(active, false);
+					});
+					if (document.fonts && document.fonts.ready) {
+						document.fonts.ready.then(function () {
+							moveTo(active, false);
+						});
+					}
+				}
+
+				/* ---- Texts reveal: play the intro once per session ---- */
+				var intro = document.querySelector(".t-stagger");
+				if (intro && !root.classList.contains("intro-seen")) {
+					requestAnimationFrame(function () {
+						requestAnimationFrame(function () {
+							intro.classList.add("is-shown");
+						});
+					});
+					try {
+						sessionStorage.setItem("intro", "1");
+					} catch (e) {}
+				}
+
+				/* ---- Pencil boil: freeze the wobble for reduced-motion users ---- */
+				if (reduce) {
+					[].slice.call(document.querySelectorAll("#boil animate")).forEach(function (a) {
+						a.remove();
+					});
+				}
+
+				/* ---- Flying bird: moves across its row and flaps as you scroll ---- */
+				var flyers = [].slice.call(document.querySelectorAll("[data-flyer]"));
+				if (flyers.length) {
+					var FRAMES = 6;
+					if (reduce) {
+						flyers.forEach(function (el) {
+							var b = el.firstElementChild;
+							b.style.setProperty("--f", 2);
+							b.style.transform = "translate3d(" + (el.clientWidth - b.offsetWidth) * 0.6 + "px,0,0)";
+						});
+					} else {
+						var lastY = window.scrollY;
+						var dir = 1;
+						var ticking = false;
+						var fly = function () {
+							ticking = false;
+							var vh = window.innerHeight;
+							var y = window.scrollY;
+							if (y !== lastY) {
+								dir = y > lastY ? 1 : -1;
+								lastY = y;
+							}
+							flyers.forEach(function (el) {
+								var r = el.getBoundingClientRect();
+								if (r.bottom < -80 || r.top > vh + 80) return;
+								var bird = el.firstElementChild;
+								// 0 as the row enters at the bottom of the screen, 1 as it leaves at the top
+								var p = Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height)));
+								var x = p * (el.clientWidth - bird.offsetWidth);
+								var bob = Math.sin(p * Math.PI * 2.5) * -9;
+								var frame = ((Math.floor(y / 24) % FRAMES) + FRAMES) % FRAMES;
+								bird.style.setProperty("--f", frame);
+								bird.style.transform = "translate3d(" + x + "px," + bob + "px,0) scaleX(" + dir + ")";
+							});
+						};
+						window.addEventListener("scroll", function () {
+							if (!ticking) {
+								ticking = true;
+								requestAnimationFrame(fly);
+							}
+						}, { passive: true });
+						window.addEventListener("resize", fly);
+						fly();
+					}
+				}
+
+				/* ---- Lite YouTube: swap the thumbnail for the real player ---- */
+				document.addEventListener("click", function (e) {
+					var b = e.target.closest && e.target.closest("[data-yt]");
+					if (!b) return;
+					var f = document.createElement("iframe");
+					f.src = "https://www.youtube-nocookie.com/embed/" + b.getAttribute("data-yt") + "?autoplay=1&rel=0";
+					f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+					f.allowFullscreen = true;
+					f.title = b.getAttribute("data-title") || "Video";
+					b.replaceWith(f);
+				});
+			})();
+		</script>
+		<script>
+			import "../scripts/alive.js";
+		</script>
+		<EmDashBodyEnd page={pageCtx} />
+	</body>
+</html>

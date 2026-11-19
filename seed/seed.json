@@ -1,0 +1,2511 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "Fayaz Ahmed",
+		"description": "Personal site of Fayaz Ahmed, as a feed.",
+		"author": "Fayaz Ahmed"
+	},
+	"settings": {
+		"title": "Fayaz Ahmed",
+		"tagline": "Sr. Developer Educator at Cloudflare. I build a lot of things, then show what's possible."
+	},
+	"collections": [
+		{
+			"slug": "posts",
+			"label": "Articles",
+			"labelSingular": "Article",
+			"urlPattern": "/posts/{slug}",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"search",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "excerpt",
+					"label": "Excerpt",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "featured_image",
+					"label": "Featured image",
+					"type": "image"
+				},
+				{
+					"slug": "pinned",
+					"label": "Pin to top of feed",
+					"type": "boolean"
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText",
+					"searchable": true
+				},
+				{
+					"slug": "note",
+					"label": "Margin note (handwritten aside)",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"slug": "projects",
+			"label": "Projects",
+			"labelSingular": "Project",
+			"urlPattern": "/projects#{slug}",
+			"supports": [
+				"drafts",
+				"search"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "description",
+					"label": "Description",
+					"type": "text",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "category",
+					"label": "Category",
+					"type": "select",
+					"required": true,
+					"validation": {
+						"options": [
+							"app",
+							"oss",
+							"experiment",
+							"earlier"
+						]
+					}
+				},
+				{
+					"slug": "badge",
+					"label": "Badge (Live, WIP, New…)",
+					"type": "string"
+				},
+				{
+					"slug": "url",
+					"label": "Live URL",
+					"type": "url"
+				},
+				{
+					"slug": "repo",
+					"label": "Repo / store URL",
+					"type": "url"
+				},
+				{
+					"slug": "stars",
+					"label": "GitHub stars",
+					"type": "integer"
+				},
+				{
+					"slug": "shipped",
+					"label": "Shipped (shown on card, e.g. Nov 2026)",
+					"type": "string"
+				},
+				{
+					"slug": "featured_image",
+					"label": "Screenshot",
+					"type": "image"
+				},
+				{
+					"slug": "featured",
+					"label": "Show in the main feed",
+					"type": "boolean"
+				},
+				{
+					"slug": "pinned",
+					"label": "Pin to top of feed",
+					"type": "boolean"
+				},
+				{
+					"slug": "sort_date",
+					"label": "Feed ordering date",
+					"type": "datetime"
+				},
+				{
+					"slug": "note",
+					"label": "Margin note (handwritten aside)",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"slug": "talks",
+			"label": "Talks",
+			"labelSingular": "Talk",
+			"supports": [
+				"drafts",
+				"search"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "event",
+					"label": "Event",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "location",
+					"label": "Location",
+					"type": "string"
+				},
+				{
+					"slug": "date",
+					"label": "Date",
+					"type": "datetime",
+					"required": true
+				},
+				{
+					"slug": "description",
+					"label": "Description",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "featured_image",
+					"label": "Cover image",
+					"type": "image"
+				},
+				{
+					"slug": "video_url",
+					"label": "Recording URL",
+					"type": "url"
+				},
+				{
+					"slug": "slides_url",
+					"label": "Slides URL",
+					"type": "url"
+				},
+				{
+					"slug": "note",
+					"label": "Margin note (handwritten aside)",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"slug": "videos",
+			"label": "Videos",
+			"labelSingular": "Video",
+			"supports": [
+				"drafts",
+				"search"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "youtube_url",
+					"label": "YouTube URL",
+					"type": "url",
+					"required": true
+				},
+				{
+					"slug": "description",
+					"label": "Description",
+					"type": "text",
+					"searchable": true
+				},
+				{
+					"slug": "date",
+					"label": "Date",
+					"type": "datetime"
+				},
+				{
+					"slug": "note",
+					"label": "Margin note (handwritten aside)",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"slug": "photos",
+			"label": "Photos",
+			"labelSingular": "Photo",
+			"supports": [
+				"drafts"
+			],
+			"fields": [
+				{
+					"slug": "image",
+					"label": "Photo",
+					"type": "image",
+					"required": true
+				},
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string"
+				},
+				{
+					"slug": "caption",
+					"label": "Caption",
+					"type": "text"
+				},
+				{
+					"slug": "location",
+					"label": "Location",
+					"type": "string"
+				},
+				{
+					"slug": "taken_at",
+					"label": "Taken on",
+					"type": "datetime"
+				},
+				{
+					"slug": "note",
+					"label": "Margin note (handwritten aside)",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"slug": "uses",
+			"label": "Uses",
+			"labelSingular": "Thing I use",
+			"supports": [
+				"drafts"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Name",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "category",
+					"label": "Category",
+					"type": "select",
+					"required": true,
+					"validation": {
+						"options": [
+							"Dev",
+							"Mac",
+							"Cloudflare",
+							"Hardware",
+							"Other"
+						]
+					}
+				},
+				{
+					"slug": "description",
+					"label": "Why",
+					"type": "text"
+				},
+				{
+					"slug": "url",
+					"label": "Link",
+					"type": "url"
+				},
+				{
+					"slug": "sticker",
+					"label": "Sticker (die-cut preview, drag to peel)",
+					"type": "image"
+				}
+			]
+		},
+		{
+			"slug": "pages",
+			"label": "Pages",
+			"labelSingular": "Page",
+			"urlPattern": "/pages/{slug}",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"search",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "content",
+					"label": "Content",
+					"type": "portableText",
+					"searchable": true
+				}
+			]
+		}
+	],
+	"taxonomies": [
+		{
+			"name": "tag",
+			"label": "Tags",
+			"labelSingular": "Tag",
+			"hierarchical": false,
+			"collections": [
+				"posts"
+			],
+			"terms": [
+				{
+					"slug": "cloudflare",
+					"label": "Cloudflare"
+				},
+				{
+					"slug": "building",
+					"label": "Building"
+				},
+				{
+					"slug": "mac",
+					"label": "Mac"
+				},
+				{
+					"slug": "design",
+					"label": "Design"
+				},
+				{
+					"slug": "local-first",
+					"label": "Local-first"
+				}
+			]
+		}
+	],
+	"bylines": [
+		{
+			"id": "byline-fayaz",
+			"slug": "fayaz-ahmed",
+			"displayName": "Fayaz Ahmed"
+		}
+	],
+	"content": {
+		"projects": [
+			{
+				"id": "project-screendrop",
+				"slug": "screendrop",
+				"status": "published",
+				"data": {
+					"title": "Screendrop",
+					"description": "Native Mac app for screenshots, annotation, recording and self-hosted sharing via your own Cloudflare Worker and R2 bucket.",
+					"category": "app",
+					"badge": "Live",
+					"url": "https://screendrop.dev/",
+					"repo": "https://github.com/fayazara/Screendrop",
+					"stars": 2400,
+					"featured": true,
+					"pinned": true,
+					"sort_date": "2026-11-18T12:00:00Z",
+					"featured_image": {
+						"src": "/projects/screendrop.jpeg",
+						"alt": "Screendrop's library of captures"
+					}
+				}
+			},
+			{
+				"id": "project-winterfell",
+				"slug": "winterfell",
+				"status": "published",
+				"data": {
+					"title": "Winterfell",
+					"description": "First-person gothic pixel-art game that runs in the browser (WebGL). Very much a work in progress, built at 12 AM.",
+					"category": "experiment",
+					"badge": "WIP",
+					"url": "https://winterfell.fayazahmed.com/",
+					"repo": "https://github.com/fayazara/Winterfell",
+					"featured": true,
+					"pinned": false,
+					"sort_date": "2026-11-19T12:00:00Z",
+					"featured_image": {
+						"src": "/projects/winterfell.jpeg",
+						"alt": "Winterfell, a pixel-art castle seen from a forest road"
+					}
+				}
+			},
+			{
+				"id": "project-lotion",
+				"slug": "lotion",
+				"status": "published",
+				"data": {
+					"title": "Lotion",
+					"description": "Local-first Mac notes app. Markdown files you own, a block editor, tasks, publishing, and a built-in MCP server.",
+					"category": "app",
+					"badge": "New",
+					"repo": "https://github.com/fayazara/Lotion",
+					"stars": 153,
+					"shipped": "Nov 2026",
+					"featured": true,
+					"pinned": false,
+					"sort_date": "2026-11-12T12:00:00Z",
+					"featured_image": {
+						"src": "/projects/lotion.jpeg",
+						"alt": "Lotion's home screen"
+					}
+				}
+			},
+			{
+				"id": "project-kaze",
+				"slug": "kaze",
+				"status": "published",
+				"data": {
+					"title": "Kaze",
+					"description": "Hold a shortcut, talk, and polished text is typed into any Mac app. Speech recognition runs on-device.",
+					"category": "app",
+					"badge": "Live",
+					"url": "https://kaze.fayazahmed.com/",
+					"repo": "https://github.com/fayazara/Kaze",
+					"stars": 227,
+					"featured": true,
+					"pinned": false,
+					"sort_date": "2026-10-20T12:00:00Z",
+					"featured_image": {
+						"src": "/projects/kaze.jpeg",
+						"alt": "Kaze's website"
+					}
+				}
+			},
+			{
+				"id": "project-coworkers",
+				"slug": "coworkers",
+				"status": "published",
+				"data": {
+					"title": "Coworkers",
+					"description": "AI teammates that each get their own computer and browser, built on Cloudflare.",
+					"category": "app",
+					"badge": "Experimental",
+					"repo": "https://github.com/fayazara/coworkers",
+					"stars": 443,
+					"featured": true,
+					"pinned": false,
+					"sort_date": "2026-10-05T12:00:00Z",
+					"featured_image": {
+						"src": "/projects/coworkers.jpeg",
+						"alt": "A Coworkers bot chatting, with its settings open"
+					}
+				}
+			},
+			{
+				"id": "project-macos-app-skills",
+				"slug": "macos-app-skills",
+				"status": "published",
+				"data": {
+					"title": "macos-app-skills",
+					"description": "Agent skills for building native macOS apps with AI coding agents.",
+					"category": "oss",
+					"repo": "https://github.com/fayazara/macos-app-skills",
+					"stars": 695,
+					"featured": true,
+					"pinned": false,
+					"sort_date": "2026-09-22T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-bucketdrop",
+				"slug": "bucketdrop",
+				"status": "published",
+				"data": {
+					"title": "BucketDrop",
+					"description": "Menu-bar app: drop a file, it uploads to your S3 or R2 bucket, you get a link.",
+					"category": "app",
+					"badge": "Live",
+					"url": "https://apps.apple.com/sg/app/bucketdrop-a-tiny-s3-client/id6757749483?mt=12",
+					"repo": "https://github.com/fayazara/bucketdrop",
+					"stars": 220,
+					"featured": true,
+					"pinned": false,
+					"sort_date": "2026-09-01T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-robot-heads",
+				"slug": "robot-heads",
+				"status": "published",
+				"data": {
+					"title": "robot-heads",
+					"description": "Animated 3D TV-headed robot avatars for React. About 6k weekly npm downloads.",
+					"category": "oss",
+					"url": "https://robot-heads.fayaz.workers.dev/",
+					"repo": "https://github.com/fayazara/robot-heads",
+					"stars": 460,
+					"featured": true,
+					"pinned": false,
+					"sort_date": "2026-08-14T12:00:00Z",
+					"featured_image": {
+						"src": "/projects/robot-heads.jpeg",
+						"alt": "robot-heads demo"
+					}
+				}
+			},
+			{
+				"id": "project-framekit",
+				"slug": "framekit",
+				"status": "published",
+				"data": {
+					"title": "Framekit",
+					"description": "Screenshot editor for iPhone and iPad. CleanShot, but for your phone.",
+					"category": "app",
+					"badge": "Live",
+					"url": "https://apps.apple.com/in/app/framekit-better-screenshots/id6757101992",
+					"featured": true,
+					"pinned": false,
+					"sort_date": "2026-07-30T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-bucket-list",
+				"slug": "bucket-list",
+				"status": "published",
+				"data": {
+					"title": "Bucket List",
+					"description": "Native Mac client for Cloudflare R2.",
+					"category": "app",
+					"badge": "Early",
+					"repo": "https://github.com/fayazara/BucketList",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-07-10T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-supersaas",
+				"slug": "supersaas",
+				"status": "published",
+				"data": {
+					"title": "SuperSaas",
+					"description": "Nuxt SaaS starter kit with auth, Stripe, orgs and an admin panel.",
+					"category": "app",
+					"url": "https://supersaas.dev/",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-06-25T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-pdf-studio",
+				"slug": "pdf-studio",
+				"status": "published",
+				"data": {
+					"title": "PDF Studio",
+					"description": "Client-side PDF tools (merge, split, lock) powered by qpdf compiled to WASM. Nothing leaves your browser.",
+					"category": "app",
+					"url": "https://pdfstudio-demo.fayaz.workers.dev/",
+					"repo": "https://github.com/fayazara/pdfstudio",
+					"stars": 99,
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-06-10T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-webhookflare",
+				"slug": "webhookflare",
+				"status": "published",
+				"data": {
+					"title": "WebhookFlare",
+					"description": "Real-time webhook inspector built on Durable Objects.",
+					"category": "app",
+					"url": "https://webhookflare.fayaz.workers.dev/",
+					"repo": "https://github.com/fayazara/webhookflare",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-05-28T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-codereel",
+				"slug": "codereel",
+				"status": "published",
+				"data": {
+					"title": "Codereel",
+					"description": "Animated code-snippet explainers, made in the browser.",
+					"category": "app",
+					"url": "https://codereel.fayazahmed.com/",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-05-12T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-texture-studio",
+				"slug": "texture-studio",
+				"status": "published",
+				"data": {
+					"title": "Texture Studio",
+					"description": "Tactile image textures and filters, applied on-device.",
+					"category": "app",
+					"url": "https://texture.fayaz.workers.dev/",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-04-30T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-flare-analytics",
+				"slug": "flare-analytics",
+				"status": "published",
+				"data": {
+					"title": "Flare Analytics",
+					"description": "Lightweight, self-hosted analytics that runs on Cloudflare.",
+					"category": "app",
+					"repo": "https://github.com/fayazara/analytics",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-04-15T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-kagaz",
+				"slug": "kagaz",
+				"status": "published",
+				"data": {
+					"title": "Kagaz",
+					"description": "A free invoice generator.",
+					"category": "app",
+					"url": "https://kagaz.app/",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-03-30T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-linkpreview",
+				"slug": "linkpreview",
+				"status": "published",
+				"data": {
+					"title": "Linkpreview",
+					"description": "See how a URL unfurls on social apps before you post it.",
+					"category": "app",
+					"url": "https://linkpreview.xyz/",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-03-12T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-feedful",
+				"slug": "feedful",
+				"status": "published",
+				"data": {
+					"title": "Feedful",
+					"description": "TweetDeck-style news reader. Hit #3 Product of the Day.",
+					"category": "app",
+					"url": "https://feedful.vercel.app/",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-02-20T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-portfolio-site-template",
+				"slug": "portfolio-site-template",
+				"status": "published",
+				"data": {
+					"title": "portfolio-site-template",
+					"description": "A playful portfolio template.",
+					"category": "oss",
+					"url": "https://portfolio-site-template.fayaz.workers.dev/",
+					"stars": 192,
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-08-01T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-logspot",
+				"slug": "logspot",
+				"status": "published",
+				"data": {
+					"title": "Logspot",
+					"description": "Self-hosted changelog template.",
+					"category": "oss",
+					"url": "https://logspot.vercel.app/",
+					"stars": 291,
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-02-01T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-pocketvue",
+				"slug": "pocketvue",
+				"status": "published",
+				"data": {
+					"title": "Pocketvue",
+					"description": "Single-binary Go and Vue SaaS starter.",
+					"category": "oss",
+					"repo": "https://github.com/fayazara/pocketvue",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-01-20T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-docs-to-mcp",
+				"slug": "docs-to-mcp",
+				"status": "published",
+				"data": {
+					"title": "docs-to-mcp",
+					"description": "Turn any docs site into an MCP server.",
+					"category": "oss",
+					"repo": "https://github.com/fayazara/docs-to-mcp",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-01-10T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-shiki-swift",
+				"slug": "shiki-swift",
+				"status": "published",
+				"data": {
+					"title": "shiki-swift",
+					"description": "A native Swift port of Shiki.",
+					"category": "oss",
+					"repo": "https://github.com/fayazara/shiki-swift",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2025-12-20T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-cobe-swift",
+				"slug": "cobe-swift",
+				"status": "published",
+				"data": {
+					"title": "cobe-swift",
+					"description": "Swift and Metal port of the cobe globe.",
+					"category": "oss",
+					"repo": "https://github.com/fayazara/cobe-swift",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2025-12-10T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-hand-drawn-lucide-icons",
+				"slug": "hand-drawn-lucide-icons",
+				"status": "published",
+				"data": {
+					"title": "Hand-drawn Lucide icons",
+					"description": "Lucide, but sketched by hand.",
+					"category": "oss",
+					"url": "https://hand-drawn-lucide-icons.fayaz.workers.dev/",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2025-11-30T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-whereami",
+				"slug": "whereami",
+				"status": "published",
+				"data": {
+					"title": "whereami",
+					"description": "A tiny Worker API that returns the caller's location.",
+					"category": "oss",
+					"url": "https://whereami.fayaz.workers.dev/",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2025-11-20T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-lego-game",
+				"slug": "lego-game",
+				"status": "published",
+				"data": {
+					"title": "Lego game",
+					"description": "A stylized Three.js brick-world adventure.",
+					"category": "experiment",
+					"url": "https://lego-stylized-nature.vercel.app/",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-09-10T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-ballance",
+				"slug": "ballance",
+				"status": "published",
+				"data": {
+					"title": "Ballance",
+					"description": "A WebGL port of the classic Ballance, in the browser.",
+					"category": "experiment",
+					"url": "https://ballance.fayaz.workers.dev/",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-08-20T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-oh-hi-mark",
+				"slug": "oh-hi-mark",
+				"status": "published",
+				"data": {
+					"title": "Oh Hi Mark",
+					"description": "A browser scratchpad.",
+					"category": "experiment",
+					"url": "https://oh-hi-mark.fayaz.workers.dev/",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-07-01T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-youtube-thumbnail-generator",
+				"slug": "youtube-thumbnail-generator",
+				"status": "published",
+				"data": {
+					"title": "YouTube Thumbnail Generator",
+					"description": "Make YouTube thumbnails without opening a design tool.",
+					"category": "experiment",
+					"url": "https://youtube-thumbnail-generator.fayaz.workers.dev/",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-06-01T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-opencode-stats",
+				"slug": "opencode-stats",
+				"status": "published",
+				"data": {
+					"title": "opencode-stats",
+					"description": "Menu-bar usage stats for OpenCode.",
+					"category": "experiment",
+					"repo": "https://github.com/fayazara/opencode-stats",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-05-01T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-what-can-browser-run-do",
+				"slug": "what-can-browser-run-do",
+				"status": "published",
+				"data": {
+					"title": "What can Browser Run do",
+					"description": "A tour of what you can do with Cloudflare Browser Run.",
+					"category": "experiment",
+					"url": "https://what-can-browser-run-do.examples.workers.dev/",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-04-01T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-boop",
+				"slug": "boop",
+				"status": "published",
+				"data": {
+					"title": "boop",
+					"description": "A little AI helper that lives on your Mac.",
+					"category": "experiment",
+					"repo": "https://github.com/fayazara/boop",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-03-01T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-xray",
+				"slug": "xray",
+				"status": "published",
+				"data": {
+					"title": "xray",
+					"description": "X profile insights, right in your timeline.",
+					"category": "experiment",
+					"repo": "https://github.com/fayazara/xray",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2026-02-01T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-onelink",
+				"slug": "onelink",
+				"status": "published",
+				"data": {
+					"title": "Onelink",
+					"description": "Link-in-bio where all the data lives in the URL.",
+					"category": "earlier",
+					"url": "https://onelink-nu.vercel.app/",
+					"stars": 1000,
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2025-06-01T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-zooper",
+				"slug": "zooper",
+				"status": "published",
+				"data": {
+					"title": "Zooper",
+					"description": "A Nuxt portfolio template.",
+					"category": "earlier",
+					"url": "https://zooper.pages.dev/",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2025-05-01T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-feedbackjar",
+				"slug": "feedbackjar",
+				"status": "published",
+				"data": {
+					"title": "Feedbackjar",
+					"description": "Self-hosted feedback and roadmaps.",
+					"category": "earlier",
+					"repo": "https://github.com/fayazara/feedbackjar",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2025-04-01T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-animated-lucide-vue",
+				"slug": "animated-lucide-vue",
+				"status": "published",
+				"data": {
+					"title": "Animated Lucide (Vue)",
+					"description": "Lucide icons that move, for Vue.",
+					"category": "earlier",
+					"url": "https://animated-lucide-vue.pages.dev/",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2025-03-01T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-hawa",
+				"slug": "hawa",
+				"status": "published",
+				"data": {
+					"title": "Hawa",
+					"description": "Ambient noise, from your menu bar.",
+					"category": "earlier",
+					"repo": "https://github.com/fayazara/hawa",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2025-02-01T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-imbox",
+				"slug": "imbox",
+				"status": "published",
+				"data": {
+					"title": "Imbox",
+					"description": "Disposable inboxes, as a Chrome extension.",
+					"category": "earlier",
+					"repo": "https://github.com/fayazara/Imbox",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2025-01-01T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-lemonrepo",
+				"slug": "lemonrepo",
+				"status": "published",
+				"data": {
+					"title": "Lemonrepo",
+					"description": "A Nuxt starter.",
+					"category": "earlier",
+					"url": "https://lemonrepo.nuxt.dev/",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2024-12-01T12:00:00Z"
+				}
+			},
+			{
+				"id": "project-nuxtra",
+				"slug": "nuxtra",
+				"status": "published",
+				"data": {
+					"title": "Nuxtra",
+					"description": "A Nuxt starter.",
+					"category": "earlier",
+					"url": "https://nuxtra.pages.dev/",
+					"featured": false,
+					"pinned": false,
+					"sort_date": "2024-11-01T12:00:00Z"
+				}
+			}
+		],
+		"uses": [
+			{
+				"id": "use-0",
+				"slug": "claude-code",
+				"status": "published",
+				"data": {
+					"title": "Claude Code",
+					"category": "Dev",
+					"description": "Where most of my code gets written these days.",
+					"url": "https://claude.com/claude-code",
+					"sticker": {
+						"src": "/stickers/claude-code.webp",
+						"alt": "Claude Code app icon"
+					}
+				}
+			},
+			{
+				"id": "use-1",
+				"slug": "rex",
+				"status": "published",
+				"data": {
+					"title": "Rex",
+					"category": "Dev",
+					"description": "The terminal I run my agents in.",
+					"sticker": {
+						"src": "/stickers/rex.webp",
+						"alt": "Rex app icon"
+					}
+				}
+			},
+			{
+				"id": "use-2",
+				"slug": "screendrop",
+				"status": "published",
+				"data": {
+					"title": "Screendrop",
+					"category": "Mac",
+					"description": "Every screenshot and recording on this site came out of it. I built it, so I'm biased.",
+					"url": "https://screendrop.dev/",
+					"sticker": {
+						"src": "/stickers/screendrop.webp",
+						"alt": "Screendrop app icon"
+					}
+				}
+			},
+			{
+				"id": "use-3",
+				"slug": "lotion",
+				"status": "published",
+				"data": {
+					"title": "Lotion",
+					"category": "Mac",
+					"description": "My notes, as plain Markdown files I own.",
+					"url": "https://github.com/fayazara/Lotion",
+					"sticker": {
+						"src": "/stickers/lotion.webp",
+						"alt": "Lotion app icon"
+					}
+				}
+			},
+			{
+				"id": "use-4",
+				"slug": "kaze",
+				"status": "published",
+				"data": {
+					"title": "Kaze",
+					"category": "Mac",
+					"description": "I talk, it types. Writing this site's copy involved a lot of Kaze.",
+					"url": "https://kaze.fayazahmed.com/",
+					"sticker": {
+						"src": "/stickers/kaze.webp",
+						"alt": "Kaze app icon"
+					}
+				}
+			},
+			{
+				"id": "use-5",
+				"slug": "cloudflare-workers",
+				"status": "published",
+				"data": {
+					"title": "Cloudflare Workers",
+					"category": "Cloudflare",
+					"description": "Where nearly everything I build ends up running.",
+					"url": "https://workers.cloudflare.com/",
+					"sticker": {
+						"src": "/stickers/cloudflare-workers.webp",
+						"alt": "Cloudflare Workers icon"
+					}
+				}
+			},
+			{
+				"id": "use-6",
+				"slug": "emdash",
+				"status": "published",
+				"data": {
+					"title": "EmDash",
+					"category": "Cloudflare",
+					"description": "The CMS behind this very site.",
+					"url": "https://emdashcms.com/",
+					"sticker": {
+						"src": "/stickers/emdash.webp",
+						"alt": "EmDash icon"
+					}
+				}
+			},
+			{
+				"id": "use-7",
+				"slug": "macbook-pro-16",
+				"status": "published",
+				"data": {
+					"title": "MacBook Pro 16-inch",
+					"category": "Hardware",
+					"description": "M4, 48 GB of RAM.",
+					"url": "https://www.apple.com/macbook-pro/",
+					"sticker": {
+						"src": "/stickers/macbook-pro-16.webp",
+						"alt": "MacBook Pro 16-inch"
+					}
+				}
+			},
+			{
+				"id": "use-8",
+				"slug": "sony-zv-e10",
+				"status": "published",
+				"data": {
+					"title": "Sony ZV-E10",
+					"category": "Hardware",
+					"description": "Mirrorless vlogging camera.",
+					"url": "https://www.sony.co.in/interchangeable-lens-cameras/products/zv-e10",
+					"sticker": {
+						"src": "/stickers/sony-zv-e10.webp",
+						"alt": "Sony ZV-E10 camera"
+					}
+				}
+			},
+			{
+				"id": "use-9",
+				"slug": "mx-master-3s",
+				"status": "published",
+				"data": {
+					"title": "Logitech MX Master 3S",
+					"category": "Hardware",
+					"description": "Quiet-click wireless mouse.",
+					"url": "https://www.logitech.com/en-us/shop/p/mx-master-3s",
+					"sticker": {
+						"src": "/stickers/mx-master-3s.webp",
+						"alt": "Logitech MX Master 3S mouse"
+					}
+				}
+			},
+			{
+				"id": "use-10",
+				"slug": "iphone-15",
+				"status": "published",
+				"data": {
+					"title": "iPhone 15",
+					"category": "Hardware",
+					"description": "The phone.",
+					"url": "https://www.apple.com/iphone-15/",
+					"sticker": {
+						"src": "/stickers/iphone-15.webp",
+						"alt": "iPhone 15"
+					}
+				}
+			},
+			{
+				"id": "use-11",
+				"slug": "mx-keys-mini",
+				"status": "published",
+				"data": {
+					"title": "Logitech MX Keys Mini",
+					"category": "Hardware",
+					"description": "Compact wireless keyboard.",
+					"url": "https://www.logitech.com/en-us/shop/p/mx-keys-mini",
+					"sticker": {
+						"src": "/stickers/mx-keys-mini.webp",
+						"alt": "Logitech MX Keys Mini keyboard"
+					}
+				}
+			}
+		],
+		"posts": [
+			{
+				"id": "post-a-site-that-looks-like-a-notebook",
+				"slug": "a-site-that-looks-like-a-notebook",
+				"status": "published",
+				"data": {
+					"title": "A site that looks like a page from a notebook",
+					"excerpt": "Why a personal site works better as one sheet of paper than as a stack of cards, and the three rules that keep it that way.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "257e3cc1a531",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "fd9405f9b3fb",
+									"text": "Most personal sites are a grid of identical cards. They are tidy, and they all feel the same. This one is built around a different idea: ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "386f5a67e425",
+									"text": "it is one page of a notebook",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "e3c6611a0597",
+									"text": ", and everything on it has to look like it belongs on that page.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "697e6d0feda1",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "28fef51156e1",
+									"text": "That sounds vague, so I turned it into rules I could check against.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "cb032d9bc17c",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "1a0f589ac941",
+									"text": "Three rules",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "7a823dcc4536",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "6a472233f3ed",
+									"text": "Anything made by hand is pen and wash. Borders, rules and underlines are drawn, not drawn ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "4b6d54f4b86b",
+									"text": "at",
+									"marks": [
+										"em"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "1784022bfeaa",
+									"text": " with CSS.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "df2108cd6347",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "713b19f15535",
+									"text": "Anything that is not hand-made is taped in as a print. Screenshots, photos, the avatar.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "041c08bd4f0a",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "748f10ede70c",
+									"text": "Type is the only other thing allowed: a text face, a typewriter face for labels and numbers, and a handwritten face for the odd margin note.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "676ef2622d20",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "99e8094e843a",
+									"text": "If a new element does not fit one of those, it does not go on the page. That one constraint killed more bad ideas than any design review.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "fda72fe13040",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "c209a59304b6",
+									"text": "The grain does a lot of work",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "a45e09ffb770",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "91348ea9abed",
+									"text": "A flat colour feels like a screen. A faint paper grain printed over the whole sheet, including the images taped to it, makes it feel like an object. It costs one pseudo-element and no extra requests.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "718f5d453721",
+							"style": "blockquote",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "b2212761b933",
+									"text": "A constraint you can check is worth ten you can only feel.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "b072545ac9f2",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "724b6547ce22",
+									"text": "What I would do again",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "d9385a79ed46",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "eec703a7d653",
+									"text": "Start from the rules, not the layout. Once the rules held, the layout mostly fell out of them, and adding a new kind of content stopped being a design problem.",
+									"marks": []
+								}
+							]
+						}
+					]
+				},
+				"bylines": [
+					{
+						"byline": "byline-fayaz"
+					}
+				],
+				"taxonomies": {
+					"tag": [
+						"design",
+						"building"
+					]
+				}
+			},
+			{
+				"id": "post-a-worker-that-does-one-thing",
+				"slug": "a-worker-that-does-one-thing",
+				"status": "published",
+				"data": {
+					"title": "Notes on building a Worker that does one thing",
+					"excerpt": "Small Cloudflare Workers age better than clever ones. A few habits that keep them boring in the good way.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "3b4c65b9838f",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "f29f49cffe0a",
+									"text": "The Workers I still trust a year later all have something in common: they do exactly one job and you can describe it in a sentence.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "78ece9bd86d6",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "6b7c174eeb37",
+									"text": "Keep the entry point thin",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "f54367aaf8a9",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "244c91b7b527",
+									"text": "The ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "e8d6e8c391d6",
+									"text": "fetch",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "199a71c4bdda",
+									"text": " handler should read the request, call a function, and return a response. Everything interesting lives in plain functions you can test without a runtime.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "code",
+							"_key": "96449781db09",
+							"code": "export default {\n  async fetch(request: Request, env: Env): Promise<Response> {\n    const url = new URL(request.url);\n    if (url.pathname === \"/health\") return Response.json({ ok: true });\n    return handle(request, env);\n  },\n} satisfies ExportedHandler<Env>;",
+							"language": "ts"
+						},
+						{
+							"_type": "block",
+							"_key": "8a987dcf5f14",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "65c3af03a901",
+									"text": "Bindings are the interface",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "743034385545",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "004d933422a5",
+									"text": "Treat ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "08d400195423",
+									"text": "Env",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "13fc5e103821",
+									"text": " as the contract. If a function needs a bucket and a database, it should say so in its arguments, not reach for a global. Tests then pass in small fakes and nothing else changes.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "ca6ba261eac5",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "073a5a50d55b",
+									"text": "Decide what happens when it fails",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "53ceb3cd0b6e",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "31cca77e3438",
+									"text": "Every network call can fail, and a Worker has no one watching it. For each one, pick out loud: retry, return a cached value, or fail fast with a clear status. The worst option is the one you did not choose.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "991e7c6fe928",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "02d1d27fd2d5",
+									"text": "Log one line per request",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "0e79c184aa30",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "335b5b7ca88c",
+									"text": "Method, path, status, duration. That is usually enough to find the problem, and it stays readable when traffic grows.",
+									"marks": []
+								}
+							]
+						}
+					]
+				},
+				"bylines": [
+					{
+						"byline": "byline-fayaz"
+					}
+				],
+				"taxonomies": {
+					"tag": [
+						"cloudflare",
+						"building"
+					]
+				}
+			},
+			{
+				"id": "post-before-you-ship-a-side-project",
+				"slug": "before-you-ship-a-side-project",
+				"status": "published",
+				"data": {
+					"title": "A short checklist before you ship a side project",
+					"excerpt": "Ten minutes of boring checks that save you a week of embarrassment after launch.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "61f2d17cd5a8",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "4346b564319e",
+									"text": "Side projects usually ship late and then break in a way you would have caught in ten minutes. This is the list I run before pressing the button.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "099574537de1",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "8858f1b54724",
+									"text": "The page",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "599510860f94",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "e254de2b0c3e",
+									"text": "Open it on a phone, on a slow connection, with the cache cleared.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "256e9e9d10aa",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "c155f782864e",
+									"text": "Check the title, description and share image by pasting the link into a chat.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "4739fca20b05",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "a54b56de1e44",
+									"text": "Tab through it with the keyboard once. If you get lost, so will other people.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "25bd8cd65c9f",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "b342ab247781",
+									"text": "The edges",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "32102ad5b192",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "fe2eee12a981",
+									"text": "What does it show when there is no data? An empty screen reads as broken.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "7af67b3b12fd",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "2b8988f64721",
+									"text": "What happens on a 404, and on an error you did not expect?",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "43baf65edf16",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "56bee8fd3aaf",
+									"text": "Is there a way to contact you that is not a form you will forget to check?",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "447a181e2bf6",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "964af513533a",
+									"text": "The part nobody does",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "f5fb154a6cf5",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ee250afd1934",
+									"text": "Write the first paragraph of the README as if you were explaining the project to a friend. If that paragraph is hard to write, the landing page will be hard to read too.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "29fe5b07b11a",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "d9d77b081f8e",
+									"text": "Then ship it. A project that is live and slightly rough teaches you more than one that is perfect and private.",
+									"marks": []
+								}
+							]
+						}
+					]
+				},
+				"bylines": [
+					{
+						"byline": "byline-fayaz"
+					}
+				],
+				"taxonomies": {
+					"tag": [
+						"building"
+					]
+				}
+			},
+			{
+				"id": "post-local-first-in-plain-words",
+				"slug": "local-first-in-plain-words",
+				"status": "published",
+				"data": {
+					"title": "Local-first, in plain words",
+					"excerpt": "Your data lives on your device, in files you can open without the app. Everything else follows from that.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "dcc4914e0eb9",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "cad5b9569a91",
+									"text": "\"Local-first\" sounds like a movement. It is really one decision: ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "5f256296f63b",
+									"text": "the copy on your device is the real one.",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "9d3da771cdc2",
+									"text": " The server, if there is one, is a convenience.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "068953c616e5",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "eac45afbad84",
+									"text": "What that buys you",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "83ca271da01c",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "b4ba5384b5c8",
+									"text": "The app opens instantly, because it is not waiting on a network.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "4b478a5d8b59",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "7f109ebb60b4",
+									"text": "It works on a plane, in a tunnel, and when the company behind it disappears.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "7dda4baf6235",
+							"style": "normal",
+							"listItem": "bullet",
+							"level": 1,
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "f0468aa9610d",
+									"text": "You can leave. Your notes are files, so another app can read them.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "d37f6123f7a3",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "b4cf5e43de78",
+									"text": "What it costs",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "019c43ad0f9d",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "eaee4eb09be2",
+									"text": "Sync becomes your problem. When two devices edit the same thing, somebody has to decide what the result is. You can avoid the hard cases by keeping data in plain files and letting the operating system and a sync service move them, but you will meet the edge cases eventually.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "3b7d92595711",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "3f11c8f84c55",
+									"text": "A test I like",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "eafc07d4dc80",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "6bdd4fa8bcf8",
+									"text": "Delete the app and look at what is left. If you can still open and read your own work, the app was a tool. If you cannot, it was a landlord.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "0c1acb20e81d",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "98fd4a2c6ec9",
+									"text": "I do not think every app should be local-first. But for things people write, think and keep, it is the right default.",
+									"marks": []
+								}
+							]
+						}
+					]
+				},
+				"bylines": [
+					{
+						"byline": "byline-fayaz"
+					}
+				],
+				"taxonomies": {
+					"tag": [
+						"building",
+						"local-first"
+					]
+				}
+			},
+			{
+				"id": "post-docs-are-part-of-the-feature",
+				"slug": "docs-are-part-of-the-feature",
+				"status": "published",
+				"data": {
+					"title": "Docs are part of the feature, not the cleanup",
+					"excerpt": "If you write the docs after the code, you document what you built. If you write them first, you notice what you should have built.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "975d182b952b",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "a5bbef16750f",
+									"text": "There is a trick that makes small features better: write the documentation paragraph ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "fe201b634f47",
+									"text": "before",
+									"marks": [
+										"strong"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "903ac8551064",
+									"text": " you write the code.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "05eae9d8d764",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "edf55994877d",
+									"text": "Why it works",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "097e010b5e92",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "fa1ce8c19ee3",
+									"text": "Documentation forces you to explain the feature to someone who has not seen it. If the explanation needs three caveats, the feature has three design problems. It is much cheaper to find them in a paragraph than in a pull request.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "00e7b54fd93e",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "2df79976a2a6",
+									"text": "The format",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "269a8902f29b",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "b4cf9c47f640",
+									"text": "Keep it small. One paragraph that says what it does and why you would use it, then one example you could paste into a terminal.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "code",
+							"_key": "db83a1068f38",
+							"code": "mytool sync --dry-run\n# 3 files would change, nothing was written",
+							"language": "sh"
+						},
+						{
+							"_type": "block",
+							"_key": "3fbaa8c63226",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "ed415fc99f9d",
+									"text": "If the example needs setup, the setup is part of the feature and belongs in the same page.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "5c3374419215",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "80b18c3d9fd2",
+									"text": "After you ship",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "6a7aaf191cfa",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "5d541384c514",
+									"text": "Re-read the page as if you were new. Anything you skim past because \"everyone knows that\" is a gap. Fix it while the code is still fresh in your head.",
+									"marks": []
+								}
+							]
+						}
+					]
+				},
+				"bylines": [
+					{
+						"byline": "byline-fayaz"
+					}
+				],
+				"taxonomies": {
+					"tag": [
+						"building"
+					]
+				}
+			},
+			{
+				"id": "post-small-type-decisions",
+				"slug": "small-type-decisions",
+				"status": "published",
+				"data": {
+					"title": "Tabular figures and other small type decisions",
+					"excerpt": "Four typographic details that cost almost nothing and quietly make a page feel finished.",
+					"content": [
+						{
+							"_type": "block",
+							"_key": "a824fedaa10f",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "44e353f678c2",
+									"text": "You rarely notice good typography, and you always notice when it is missing. These are the cheap details I reach for first.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "f8ded29da1a6",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "39c50bffa0e9",
+									"text": "Tabular figures",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "5c2464f294c1",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "f937c34019d7",
+									"text": "Numbers in a list, a table or a date column should line up. Most modern fonts have tabular figures, and in CSS it is one line:",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "code",
+							"_key": "54e312648c1f",
+							"code": ".numbers {\n  font-variant-numeric: tabular-nums;\n}",
+							"language": "css"
+						},
+						{
+							"_type": "block",
+							"_key": "d3153f072ea8",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "3ebeb627a8db",
+									"text": "Without it, ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "c17a2c6a8d03",
+									"text": "1",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "78dd8f442e9c",
+									"text": " is narrower than ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "5ab3d9d56100",
+									"text": "0",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "a6099bfd84c7",
+									"text": " and columns jitter as values change.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "e827cb7c7051",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "c36c5dbcce54",
+									"text": "Optical sizing",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "db339b4f38ea",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "34ce31fb9f3b",
+									"text": "A font designed for large sizes has tighter spacing and finer details than the same font at body size. If your font has an optical size axis, leave ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "dd9b63f617c1",
+									"text": "font-optical-sizing",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "d0f02d4e8e3a",
+									"text": " on ",
+									"marks": []
+								},
+								{
+									"_type": "span",
+									"_key": "348edfc90a63",
+									"text": "auto",
+									"marks": [
+										"code"
+									]
+								},
+								{
+									"_type": "span",
+									"_key": "e43eff56f102",
+									"text": " and let it work.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "6c979cb5f9a9",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "d44565266e91",
+									"text": "Balanced headings",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "62512677c161",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "0434199557c0",
+									"text": "Long headings that leave one word on the last line look like a mistake.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "code",
+							"_key": "f8203ec83605",
+							"code": "h1, h2 { text-wrap: balance; }",
+							"language": "css"
+						},
+						{
+							"_type": "block",
+							"_key": "daa580c0a8b5",
+							"style": "h2",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "b8a91dba4db0",
+									"text": "One weight per job",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "55dc8ac11bfb",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "c3202c312913",
+									"text": "Pick a weight for titles and a weight for body text and stop. Three weights on one screen reads as noise.",
+									"marks": []
+								}
+							]
+						},
+						{
+							"_type": "block",
+							"_key": "43fc2faca12d",
+							"style": "normal",
+							"markDefs": [],
+							"children": [
+								{
+									"_type": "span",
+									"_key": "73de014b9079",
+									"text": "None of this is dramatic. That is the point.",
+									"marks": []
+								}
+							]
+						}
+					]
+				},
+				"bylines": [
+					{
+						"byline": "byline-fayaz"
+					}
+				],
+				"taxonomies": {
+					"tag": [
+						"design"
+					]
+				}
+			}
+		],
+		"talks": [
+			{
+				"id": "talk-shipping-on-the-edge",
+				"slug": "shipping-on-the-edge",
+				"status": "published",
+				"data": {
+					"title": "Shipping on the edge, one small Worker at a time",
+					"event": "Edge Builders Meetup",
+					"location": "Bengaluru",
+					"date": "2026-10-24T12:00:00Z",
+					"description": "A tour of small, single-purpose serverless functions: what to put in one, how to test it without a runtime, and how to keep a dozen of them understandable."
+				}
+			},
+			{
+				"id": "talk-local-first-without-the-tears",
+				"slug": "local-first-without-the-tears",
+				"status": "published",
+				"data": {
+					"title": "Local-first apps without the sync tears",
+					"event": "Notebook Conf",
+					"location": "Online",
+					"date": "2026-09-12T12:00:00Z",
+					"description": "How far plain files, a good folder structure and an off-the-shelf sync service will get you, and the three cases where they will not."
+				}
+			},
+			{
+				"id": "talk-coding-agents-without-losing-the-plot",
+				"slug": "coding-agents-without-losing-the-plot",
+				"status": "published",
+				"data": {
+					"title": "Building with coding agents without losing the plot",
+					"event": "Build Weekend",
+					"location": "Mumbai",
+					"date": "2026-07-18T12:00:00Z",
+					"description": "Practical habits for working with an AI coding agent: small tasks, written specs, tests as the contract, and when to take the keyboard back."
+				}
+			},
+			{
+				"id": "talk-a-tour-of-a-self-hosted-cms",
+				"slug": "a-tour-of-a-self-hosted-cms",
+				"status": "published",
+				"data": {
+					"title": "A tour of a self-hosted CMS you can actually read",
+					"event": "Open Web Day",
+					"location": "Hyderabad",
+					"date": "2026-05-09T12:00:00Z",
+					"description": "Schema, seed file, admin UI and templates in one repository. What it is like to run your own content system on serverless infrastructure."
+				}
+			},
+			{
+				"id": "talk-a-site-that-feels-handmade",
+				"slug": "a-site-that-feels-handmade",
+				"status": "published",
+				"data": {
+					"title": "Designing a personal site that feels handmade",
+					"event": "Interface Lab",
+					"location": "Online",
+					"date": "2026-03-21T12:00:00Z",
+					"description": "Rules over mood boards: how a short list of constraints (pen, wash, tape, type) keeps a whole site consistent."
+				}
+			}
+		],
+		"videos": [
+			{
+				"id": "video-never-gonna-give-you-up",
+				"slug": "never-gonna-give-you-up",
+				"status": "published",
+				"data": {
+					"title": "Never Gonna Give You Up",
+					"youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+					"description": "A placeholder video. Swap in your own talks, demos and screen recordings.",
+					"date": "2026-11-01T12:00:00Z"
+				}
+			}
+		]
+	}
+}

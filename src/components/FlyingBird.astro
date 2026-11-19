@@ -1,0 +1,12 @@
+---
+/**
+ * One bird that flies as you scroll. The sprite strip (public/art/bird-sprite.webp)
+ * is six wing-flap frames; the script in Base.astro moves the bird across its
+ * row as the row scrolls through the viewport and picks the frame from the
+ * scroll distance. Reduced-motion users get a static, level-winged bird.
+ */
+---
+
+<div class="flyer" data-flyer aria-hidden="true">
+	<div class="flyer__bird"></div>
+</div>

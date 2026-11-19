@@ -1,0 +1,61 @@
+---
+import Doodle from "./Doodle.astro";
+import Cat from "./Cat.astro";
+import { site } from "../site";
+
+const links = [
+	{ label: "x.com/fayazara", href: site.links.x, rel: "me" },
+	{ label: "github.com/fayazara", href: site.links.github, rel: "me" },
+	{ label: "rss feed", href: "/rss.xml" },
+	{ label: "search the notebook", href: "/search" },
+];
+---
+
+<header class="me t-stagger">
+	<div class="me__top t-stagger-line" style="--n:0">
+		<button type="button" class="print print--avatar" data-tape="1" data-flip aria-pressed="false" aria-label="Turn the photo over">
+			<span class="tape" aria-hidden="true"></span>
+			<span class="flip__inner">
+				<span class="flip__face flip__front">
+					<img src="/avatar.jpg" alt="Fayaz laughing, with a snowy mountain behind him" width="96" height="96" fetchpriority="high" />
+				</span>
+				<span class="flip__face flip__back">
+					<span class="flip__hand">smiling at something just off camera</span>
+				</span>
+			</span>
+		</button>
+		<button type="button" class="me__hello" data-plane aria-label="Throw a paper plane" title="throw a paper plane">
+			<Doodle class="me__arrow" size={42} />
+			<span>hi, I'm Fayaz</span>
+		</button>
+	</div>
+
+	<h1 class="me__name t-stagger-line" style="--n:1">
+		<span>Fayaz</span> <span>Ahmed</span>
+	</h1>
+
+	<div class="me__copy t-stagger-line" style="--n:2">
+		<p class="me__role">
+			Developer educator at <a class="hand-link" href="https://cloudflare.com">Cloudflare</a>, based in {site.location.split(",")[0]}.
+		</p>
+		<p class="me__bio">
+			I build a lot of things, then show what's possible: open source, talks, videos and long posts.
+		</p>
+	</div>
+
+	<div class="note-wrap t-stagger-line" style="--n:3">
+		<Cat />
+		<a class="note sketch" href="https://screendrop.dev" target="_blank" rel="noopener noreferrer">
+		<span class="note__tag mono">now</span>
+		<span class="note__hand">Building Screendrop, a Mac app for screenshots and recordings.</span>
+	</a>
+	</div>
+
+	<ul class="me__links mono t-stagger-line" style="--n:4">
+		{
+			links.map((l) => (
+				<li><a class="hand-link" href={l.href} rel={l.rel}>{l.label}</a></li>
+			))
+		}
+	</ul>
+</header>
